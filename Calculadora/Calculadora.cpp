@@ -4,7 +4,8 @@
 #define multiplicar(a,b) a*b
 #define dividir(a,b) a/b
 using namespace std;
-int num1, num2, op;
+double num1, num2;
+int op;
 double resultado;
 bool op_seguir, stop, diferente;
 int main() {
