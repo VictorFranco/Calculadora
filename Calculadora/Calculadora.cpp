@@ -8,17 +8,39 @@ double num1, num2;
 int op;
 double resultado;
 bool op_seguir, stop, diferente;
+double numeroD() {
+	double num;
+	cin >> num;
+	while (cin.fail() && cin.rdstate()){
+		cin.clear();
+		cin.ignore();
+		cout << "este no es un numero\nescribe un numero" << endl;
+		cin >> num;
+	}
+	return num;
+}
+int numeroI() {
+	int num;
+	cin >> num;
+	while (cin.fail() && cin.rdstate()) {
+		cin.clear();
+		cin.ignore();
+		cout << "este no es un numero\nescribe un numero" << endl;
+		cin >> num;
+	}
+	return num;
+}
 int main() {
 	cout << "hola soy una calculadora" << endl;
-	while (!stop) {
+	do{
+		cin.clear();
 		cout << "escribe el primer numero" << endl;
-		cin >> num1;
+		num1=numeroD();
 		cout << "escribe el segundo numero" << endl;
-		cin >> num2;
+		num2 = numeroD();
 		cout << "selecciona una opcion" << endl;
 		cout << "1.sumar\n2.restar\n3.multiplicar\n4.dividir" << endl;
-		cin >> op;
-		cout<<"opcion seleccionada: "<<op<<endl;
+		op=numeroI();
 		switch (op){
 			case 1:
 				resultado=sumar(num1,num2);
@@ -38,22 +60,28 @@ int main() {
 				break;
 		}
 		if (!diferente) {
+			cout << "opcion seleccionada: " << op << endl;
 			cout << "resultado: "<<resultado << endl;
 		}
 		else {
 			diferente = false;
 		}
-		while (!op_seguir) {
+		do{
 			cout << "elige una opcion\n1.continuar\n2.parar" << endl;
-			cin >> op;
+			op=numeroI();
+			if (op == 1) {
+				op_seguir = true;
+			}
 			if (op == 2) {
 				stop = true;
+				op_seguir = true;
 			}
-			if (op == 2 || op == 1) {
-				op_seguir=true;
+			if (op != 1 && op != 2) {
+				op_seguir = false;
 			}
-		}
-	}
+		} while (!op_seguir);
+		cout << "opcion seleccionada: " << op << endl;
+	} while (!stop);
 	system("pause");
 	return 0;
 }
